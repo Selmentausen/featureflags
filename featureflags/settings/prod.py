@@ -1,5 +1,7 @@
 import os
 
+from celery.schedules import crontab
+
 from .base import *  # noqa: F401,F403
 
 # ruff: noqa: F405
@@ -29,3 +31,11 @@ CACHES = {
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 CSRF_COOKIE_SECURE = SESSION_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 60 * 60 * 24 * 7
+
+# Celery
+CELERY_BEAT_SCHEDULER = {
+    "daily-evaluation-aggregate": {
+        "task": "core.tasks.aggregate_flag_evaluations",
+        "schedule": crontab(minute=0, hour=0),
+    }
+}

@@ -1,5 +1,7 @@
 import os
 
+from celery.schedules import crontab
+
 from .base import *  # noqa: F401,F403
 
 # ruff: noqa: F405
@@ -30,3 +32,11 @@ INSTALLED_APPS += ["django_extensions", "debug_toolbar"]
 MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 INTERNAL_IPS = ["127.0.0.1"]
+
+# Celery
+CELERY_BEAT_SCHEDULE = {
+    "daily-evaluation-aggregate": {
+        "task": "core.tasks.aggregate_flag_evaluations",
+        "schedule": crontab(minute=0, hour=0),
+    }
+}
