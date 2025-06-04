@@ -1,7 +1,35 @@
+# Virtual environments
 .venv/
+venv/
+
+# Python cache and compiled files
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
+
+# Distribution directories
+build/
+dist/
+*.egg-info/
+
+# Database files
 *.sqlite3
+
+# Logs and runtime files
+*.log
+*.pid
+celerybeat-schedule
+celerybeat.pid
+
+# IDE directories
+.idea/
+.vscode/
+
+# System files
 .DS_Store
-.env.dev
+
+# Environment files
 .env
+.env.*
+!.env.sample
